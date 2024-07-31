@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddScoped<userService>();
+builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<BlogItemService>();
 builder.Services.AddScoped<PasswordService>();
 
