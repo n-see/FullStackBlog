@@ -53,15 +53,15 @@ Delete
 
 <!-- Models Folder -->
 
-<!-- UserModel
+UserModel
     
         Id int
         username string
         salt string
         hash string
- -->
 
- <!-- BlogItemModel
+
+ BlogItemModel
 
         id int
         UserId int
@@ -73,7 +73,7 @@ Delete
         category string
         isPublished bool
         isDeleted bool
- -->
+
 
  <!-- Items that will be saved to our database are above -->
 
