@@ -21,7 +21,7 @@ namespace api.Controllers
 
         //Add user
 
-        [HttpPost]
+        [HttpPost("AddUsername")]
 
         public bool AddUser(CreateAccountDTO UserToAdd)
         {
