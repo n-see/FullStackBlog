@@ -111,11 +111,17 @@ public class UserService : ControllerBase
         return _context.UserInfo;
     }
 
+    public UserModel GetAllUserDataByUsername(string username){
+        return _context.UserInfo.FirstOrDefault(user => user.Username == username);
+    }
+
     public IActionResult Login(LoginDTO user)
     {
         IActionResult Result = Unauthorized();
         if(DoesUserExist(user.Username))
-        {
+        {   
+            UserModel foundUser = GetAllUserDataByUsername(user.Username);
+            if(VerifyUserPassword(user.Password,foundUser.Hash,foundUser.Salt)){
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("letsaddmorereallylongkeysuperSecretKey@345"));
             var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
             var tokeOptions = new JwtSecurityToken(
@@ -127,6 +133,8 @@ public class UserService : ControllerBase
             );
             var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
             Result = Ok(new { Token = tokenString });
+            }
+
         }
         return Result;
     }
