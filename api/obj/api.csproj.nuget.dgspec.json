@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\neoco\\OneDrive\\Documents\\CodeStack\\Notes\\Level 4\\FullStackBlog\\api\\api.csproj": {}
+    "C:\\Users\\neoco\\OneDrive\\Documents\\CodeStack\\Notes\\Level 4\\FullStackBlog\\api\\api.csproj": {}
   },
   "projects": {
-    "c:\\Users\\neoco\\OneDrive\\Documents\\CodeStack\\Notes\\Level 4\\FullStackBlog\\api\\api.csproj": {
+    "C:\\Users\\neoco\\OneDrive\\Documents\\CodeStack\\Notes\\Level 4\\FullStackBlog\\api\\api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\neoco\\OneDrive\\Documents\\CodeStack\\Notes\\Level 4\\FullStackBlog\\api\\api.csproj",
+        "projectUniqueName": "C:\\Users\\neoco\\OneDrive\\Documents\\CodeStack\\Notes\\Level 4\\FullStackBlog\\api\\api.csproj",
         "projectName": "api",
-        "projectPath": "c:\\Users\\neoco\\OneDrive\\Documents\\CodeStack\\Notes\\Level 4\\FullStackBlog\\api\\api.csproj",
+        "projectPath": "C:\\Users\\neoco\\OneDrive\\Documents\\CodeStack\\Notes\\Level 4\\FullStackBlog\\api\\api.csproj",
         "packagesPath": "C:\\Users\\neoco\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\neoco\\OneDrive\\Documents\\CodeStack\\Notes\\Level 4\\FullStackBlog\\api\\obj\\",
+        "outputPath": "C:\\Users\\neoco\\OneDrive\\Documents\\CodeStack\\Notes\\Level 4\\FullStackBlog\\api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\neoco\\AppData\\Roaming\\NuGet\\NuGet.Config"

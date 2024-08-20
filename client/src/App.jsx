@@ -4,6 +4,9 @@ import NavBar from './components/NavBar';
 import CarouselHero from './components/CarouselHero';
 import Dashboard from './components/Dashboard';
 import BlogPage from './components/BlogPage';
+import CreateAccount from './components/CreateAccount';
+import Login from './components/Login';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 const App = () => {
 
@@ -32,26 +35,31 @@ const App = () => {
 
   return (
     <>
-        <Container fluid 
-          className= {`${isDarkMode ? 'bg-dark text-light' : 'bg-light'}`}
-          style={{ minHeight: "100vh", padding: '0px' }}
-        >
-            <Container className='p-0' fluid>
-              <NavBar isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
-            </Container>
+        <BrowserRouter>
+          <Container fluid
+            className= {`${isDarkMode ? 'bg-dark text-light' : 'bg-light'}`}
+            style={{ minHeight: "100vh", padding: '0px' }}
+          >
+              <Container className='p-0' fluid>
+                <NavBar isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
+              </Container>
+              <CarouselHero isDarkMode={isDarkMode} />
+              <Row className='text-center'>
+                <Col>
+                    <h1>Our Blog</h1>
+                </Col>
+                <Routes>
+                  <Route path="/" element={<BlogPage/>} />
+                  <Route path="/Login" element={<Login/>} />
+                  <Route path="/CreateAccount" element={<CreateAccount/>} />
+                  <Route path="/Dashboard" element={<Dashboard isDarkMode={isDarkMode}/>} />
+                </Routes>
 
-            <CarouselHero isDarkMode={isDarkMode} />
-
-            <Row className='text-center'>
-              <Col>
-                  <h1>Our Blog</h1>
-              </Col>
-            </Row>
-
-            <Dashboard isDarkMode={isDarkMode}/>
-            <BlogPage />
+                
+              </Row>
           
-        </Container>
+          </Container>
+        </BrowserRouter>
     </>
   )
 }

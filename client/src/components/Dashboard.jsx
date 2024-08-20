@@ -145,7 +145,7 @@ const Dashboard = ({ isDarkMode }) => {
                                 </Form.Select>
                             </Form.Group>
 
-                            <Form.Group className="mb-3" controlId="Tags" value={blogTags}> onChange={handleTag}
+                            <Form.Group className="mb-3" controlId="Tags" value={blogTags} onChange={handleTag}>
                                 <Form.Label>Tags</Form.Label>
                                 <Form.Control type="text" placeholder="Enter Tag" />
                             </Form.Group>
