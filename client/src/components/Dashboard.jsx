@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { Container, Row, Col, Button, Modal, Form, Accordion, ListGroup } from "react-bootstrap";
 import {useNavigate} from 'react-router-dom'
+import { checkToken } from "../Services/DataService";
+
 
 const Dashboard = ({ isDarkMode }) => {
     // usestates
@@ -13,6 +15,7 @@ const Dashboard = ({ isDarkMode }) => {
     const [blogTags, setBlogTags] = useState("");
 
     const [edit, setEdit] = useState(false);
+    
 
     const [blogItems, setBlogItems] = useState([
         {

@@ -33,7 +33,7 @@ const createAccount = async (createdUser) =>
 
 const login = async (loginUser) =>
 {
-    const result = await fetch("http://localhost:5118/api/User/AddUsers", {
+    const result = await fetch("http://localhost:5118/api/User/Login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -46,6 +46,9 @@ const login = async (loginUser) =>
     }
     let data= await result.json();
     console.log(data);
+    return data;
+    
+
 }
 
 const GetLoggedInUser = async  (username) => {
