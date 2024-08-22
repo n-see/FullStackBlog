@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { Container, Row, Col, Button, Modal, Form, Accordion, ListGroup } from "react-bootstrap";
+import {useNavigate} from 'react-router-dom'
 
 const Dashboard = ({ isDarkMode }) => {
     // usestates
@@ -104,6 +105,15 @@ const Dashboard = ({ isDarkMode }) => {
     const handleImage = (e) => {
         setBlogImage(e.target.value);
     }
+
+    let navigate = useNavigate();
+
+    useEffect(() => {
+        if(!checkToken())
+        {
+            navigate('/Login')
+        }
+    }, [])
 
     return (
         <>
