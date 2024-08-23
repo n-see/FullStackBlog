@@ -53,7 +53,9 @@ const login = async (loginUser) =>
 
 const GetLoggedInUser = async  (username) => {
     let result = await fetch(`"http://localhost:5118/api/User/GetUserByUsername/${username}"`)
-    console.log(result);
+    userData = await result.json();
+    console.log(userData);
+    return userData;
 }
 
 export {checkToken, createAccount, login, GetLoggedInUser}
