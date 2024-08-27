@@ -10,7 +10,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 const App = () => {
 
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true);
   const[user, setUser] = useState(null);
 
   const handleLogin = (userData) => {

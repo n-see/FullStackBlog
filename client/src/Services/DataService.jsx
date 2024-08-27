@@ -2,6 +2,8 @@
 
 //helper functionto check our token
 
+let userData = {};
+
 const checkToken = () => {
     let result = false;
     let lsData = localStorage.getItem("Token");
@@ -52,10 +54,15 @@ const login = async (loginUser) =>
 }
 
 const GetLoggedInUser = async  (username) => {
-    let result = await fetch(`"http://localhost:5118/api/User/GetUserByUsername/${username}"`)
+    let result = await fetch(`http://localhost:5118/api/User/GetUserByUsername/${username}`)
     userData = await result.json();
     console.log(userData);
     return userData;
 }
 
-export {checkToken, createAccount, login, GetLoggedInUser}
+const LoggedInData = () => {
+
+    return userData;
+}
+
+export {checkToken, createAccount, login, GetLoggedInUser, LoggedInData}
