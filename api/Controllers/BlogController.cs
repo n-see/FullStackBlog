@@ -50,7 +50,8 @@ namespace api.Controllers
 
         // GetBlogItemsByDate
         [HttpGet("GetItemsByDate/{Date}")]
-        public IEnumerable<BlogItemModel> GetItemsByDate(string Date){
+        public IEnumerable<BlogItemModel> GetItemsByDate(string Date)
+        {
             return _data.GetItemsByDate(Date);
         }
 
@@ -68,11 +69,18 @@ namespace api.Controllers
             return _data.DeleteBlogItem(BlogDelete);
         }
 
-         //GetPublishedBlogItems
+        //GetPublishedBlogItems
         [HttpGet("GetPublishedItems")]
         public IEnumerable<BlogItemModel> GetPublishedItem()
         {
             return _data.GetPublishedItems();
+        }
+        //WE need a GetItemsByUserId 
+        [HttpGet("GetItemsByUserId/{UserId}")]
+
+        public IEnumerable<BlogItemModel> GetItemsByUserId(int UserId)
+        {
+            return _data.GetItemsByUserId(UserId);
         }
     }
 }
