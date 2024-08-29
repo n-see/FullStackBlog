@@ -33,9 +33,11 @@ const Login = ({onLogin}) => {
         console.log(token.token, "this should be a token");
         if(token.token != null){
             localStorage.setItem("Token", token.token);
+            // localStorage.setItem("UserData", JSON.stringify(userData));
             GetLoggedInUser(Username);
             navigate('/Dashboard')
         }
+        return userData;
     }
 
     return (

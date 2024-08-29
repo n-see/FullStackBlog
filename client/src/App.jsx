@@ -38,6 +38,17 @@ const App = () => {
     setIsDarkMode(prevMode => !prevMode);
   }
 
+  useEffect(() => {
+    
+    const storedUser = localStorage.getItem("UserData");
+    if(storedUser){
+      let Userstored = JSON.parse(storedUser);
+      setUser(Userstored);
+    }
+
+  }, [])
+  
+
   return (
     <>
         <BrowserRouter>

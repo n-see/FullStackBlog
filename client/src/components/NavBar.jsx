@@ -7,6 +7,7 @@ import Moon from "../assets/moon.jpg";
 const NavBar = ({ isDarkMode, toggleDarkMode, user }) => {
 
     // stuff here
+    console.log(user)
 
     return (
         <>
@@ -38,7 +39,7 @@ const NavBar = ({ isDarkMode, toggleDarkMode, user }) => {
                             <Nav.Link as={Link} to={"/CreateAccount"}>Create Account</Nav.Link>
                             <Nav.Link as={Link} to={"/Login"}>Login</Nav.Link>
 
-                            <Nav.Link>Welcome {user ? user.username : "Guest"}</Nav.Link>
+                            <Nav.Link>Welcome {user ? user.publisherName : "Guest"}</Nav.Link>
                             <Nav.Link eventKey={2} href="#memes">
                                 <Image className="profilepic" src={Moon} roundedCircle />
                             </Nav.Link>

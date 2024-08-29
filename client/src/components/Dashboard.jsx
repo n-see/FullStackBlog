@@ -20,7 +20,7 @@ import {
 } from "../Services/DataService";
 
 const Dashboard = ({ isDarkMode }) => {
-    // usestates
+    // useStates
 
     const [blogTitle, setBlogTitle] = useState("");
     const [blogImage, setBlogImage] = useState("");
@@ -55,7 +55,7 @@ const Dashboard = ({ isDarkMode }) => {
         if (result) {
             let userBlogItems = await GetItemsByUserId(userId);
             setBlogItems(userBlogItems);
-            console.log(userBlogItems, "This is frou our UserBlogItems");
+            console.log(userBlogItems, "This is from our UserBlogItems");
         }
     };
 
@@ -75,6 +75,14 @@ const Dashboard = ({ isDarkMode }) => {
             IsDeleted: false,
         };
         console.log(notPublished);
+        handleClose();
+
+        let result = await AddBlogItems(notPublished);
+        if (result) {
+            let userBlogItems = await GetItemsByUserId(userId);
+            setBlogItems(userBlogItems);
+            console.log(userBlogItems, "This is frou our UserBlogItems");
+        }
     };
 
     const [show, setShow] = useState(false);
@@ -116,17 +124,37 @@ const Dashboard = ({ isDarkMode }) => {
 
     let navigate = useNavigate();
 
+    const loadUserData = async () => {
+        let userInfo = JSON.parse(localStorage.getItem("UserData"));
+        console.log("User info:", userInfo.userId);
+        setUserId(userInfo.userId);
+        setPublisherName(userInfo.publisherName)
+        // let userBlogItems = await GetItemsByUserId(userInfo.userId);
+        // setBlogItems(userBlogItems)
+        // console.log("Loaded blog items: " , userBlogItems)
+        
+        setTimeout(async () => {
+            let userBlogItems = await GetItemsByUserId(userInfo.userId);
+            setBlogItems(userBlogItems)
+            console.log("Loaded blog items: " , userBlogItems)
+        },1000)
+    }
+
     useEffect(() => {
         if (!checkToken()) {
             navigate("/Login");
         }
+        loadUserData();
     }, []);
+
+
 
     const handleImage = async (e) => {
         let file = e.target.files[0];
         const reader = new FileReader();
         reader.onloadend = () => {
             console.log(reader.result);
+            setBlogImage(reader.result);
         };
         reader.readAsDataURL(file);
     };
