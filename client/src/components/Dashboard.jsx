@@ -39,10 +39,14 @@ const Dashboard = ({ isDarkMode, onLogin }) => {
     const [blogItems, setBlogItems] = useState([]);
     const [isLoading, setIsLoading ] = useState(true);
 
+    const [blogId, setBlogId] = useState(0);
+    const [IsDeleted, setIsDeleted] = useState(false);
+    const [isPublished, setIsPublished] = useState(false);
 
 
-    const handleSaveWithPublish = async () => {
-        let { publisherName, userId } = LoggedInData();
+
+    const handleSave = async ({target:{textContent}}) => {
+        // let { publisherName, userId } = LoggedInData();
         const published = {
             Id: 0,
             UserId: userId,
@@ -53,7 +57,7 @@ const Dashboard = ({ isDarkMode, onLogin }) => {
             Description: blogDescription,
             Date: new Date(),
             Category: blogCategory,
-            IsPublished: true,
+            IsPublished: textContent ==="Save" ? false: true,
             IsDeleted: false,
         };
         console.log(published);
@@ -66,54 +70,59 @@ const Dashboard = ({ isDarkMode, onLogin }) => {
         }
     };
 
-    const handleSaveWithUnpublish = async () => {
-        let { publisherName, userId } = LoggedInData();
-        const notPublished = {
-            Id: 0,
-            UserId: userId,
-            PublisherName: publisherName,
-            Tag: blogTags,
-            Title: blogTitle,
-            Image: blogImage,
-            Description: blogDescription,
-            Date: new Date(),
-            Category: blogCategory,
-            IsPublished: false,
-            IsDeleted: false,
-        };
-        console.log(notPublished);
-        handleClose();
+    // const handleSaveWithUnpublish = async () => {
+    //     let { publisherName, userId } = LoggedInData();
+    //     const notPublished = {
+    //         Id: 0,
+    //         UserId: userId,
+    //         PublisherName: publisherName,
+    //         Tag: blogTags,
+    //         Title: blogTitle,
+    //         Image: blogImage,
+    //         Description: blogDescription,
+    //         Date: new Date(),
+    //         Category: blogCategory,
+    //         IsPublished: false,
+    //         IsDeleted: false,
+    //     };
+    //     console.log(notPublished);
+    //     handleClose();
 
-        let result = await AddBlogItems(notPublished);
-        if (result) {
-            let userBlogItems = await GetItemsByUserId(userId);
-            setBlogItems(userBlogItems);
-            console.log(userBlogItems, "This is frou our UserBlogItems");
-        }
-    };
+    //     let result = await AddBlogItems(notPublished);
+    //     if (result) {
+    //         let userBlogItems = await GetItemsByUserId(userId);
+    //         setBlogItems(userBlogItems);
+    //         console.log(userBlogItems, "This is frou our UserBlogItems");
+    //     }
+    // };
 
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
-    const handleShow = (e, {title, description, category, tag, image}) => {
+    const handleShow = (e, {id, publisherName,userId,title, description, category, tag, image, isDeleted, isPublished}) => {
         setShow(true);
 
         if (e.target.textContent === "Add Blog Item") {
+            
             setEdit(false);
-            setBlogTitle("");
-            setBlogDescription("");
-            setBlogCategory("");
+
+            console.log(e.target.textContent, edit);
+
         } else {
             setEdit(true);
+        }
+
+            setBlogId(blogId);
             setBlogTitle(title);
+            setUserId(userId);
+            setPublisherName(publisherName)
             setBlogDescription(description);
             setBlogCategory(category);
             setBlogTags(tag);
             setBlogImage(image);
-            console.log(E.target.textContent, edit);
-        }
-
-        console.log(e.target.textContent, edit);
+            setIsDeleted(isDeleted);
+            setIsPublished(isPublished);
+            console.log(e.target.textContent, edit);
     };
 
     const handleTitle = (e) => {
@@ -180,7 +189,7 @@ const Dashboard = ({ isDarkMode, onLogin }) => {
                 className={isDarkMode ? "bg-dark text-light p-5" : "bg-light p-5"}
                 fluid
             >
-                <Button variant="outline-primary m-2" onClick={handleShow}>
+                <Button variant="outline-primary m-2" onClick={(e) => handleShow(e,{id:0,userId:userId,title:"",description:"", tag:"", category:"", image:"", isDeleted:false, isPublished:false, publisherName:publisherName})}>
                     Add Blog Item
                 </Button>
                 <Button variant="outline-primary m-2" onClick={handleShow}>
@@ -230,10 +239,10 @@ const Dashboard = ({ isDarkMode, onLogin }) => {
                         <Button variant="outline-secondary" onClick={handleClose}>
                             Cancel
                         </Button>
-                        <Button variant="outline-primary" onClick={handleSaveWithUnpublish}>
+                        <Button variant="outline-primary" onClick={handleSave}>
                             {edit ? "Save Changes" : "Save"}
                         </Button>
-                        <Button variant="outline-primary" onClick={handleSaveWithPublish}>
+                        <Button variant="outline-primary" onClick={handleSave}>
                             {edit ? "Save Changes" : "Save"} and Publish
                         </Button>
                     </Modal.Footer>
