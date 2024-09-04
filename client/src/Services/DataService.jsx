@@ -1,4 +1,6 @@
 //This will hold our helper functions or method
+import { json } from "react-router-dom";
+
 
 //helper function to check our token
 
@@ -65,7 +67,7 @@ const GetLoggedInUser = async  (username) => {
     userData = await result.json();
     console.log(userData,"getloggedinsuser method")
     localStorage.setItem("UserData", JSON.stringify(userData));
-    userData = JSON.parse(localStorage.getItem("UserData"))
+    // userData = JSON.parse(localStorage.getItem("UserData"))
 
 }
 

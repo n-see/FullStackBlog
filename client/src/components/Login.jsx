@@ -3,7 +3,7 @@ import { Container, Row, Col, Button, Form } from "react-bootstrap"
 import {useNavigate} from "react-router-dom"
 import { GetLoggedInUser, login } from "../Services/DataService";
 
-const Login = ({onLogin}) => {
+const Login = ({}) => {
 
     let navigate = useNavigate();
 
@@ -28,13 +28,13 @@ const Login = ({onLogin}) => {
             Password: Password
         }
         console.log(userData)
-        onLogin(userData)
+     
         let token = await login(userData)
         console.log(token.token, "this should be a token");
         if(token.token != null){
             localStorage.setItem("Token", token.token);
             // localStorage.setItem("UserData", JSON.stringify(userData));
-            GetLoggedInUser(Username);
+             await GetLoggedInUser(Username);
             navigate('/Dashboard')
         }
         return userData;
