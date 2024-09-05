@@ -17,6 +17,7 @@ import {
     GetItemsByUserId,
     GetLoggedInUser,
     LoggedInData,
+    updateBlogItems,    
 } from "../Services/DataService";
 import Spinner from 'react-bootstrap/Spinner';
 
@@ -48,7 +49,7 @@ const Dashboard = ({ isDarkMode, onLogin }) => {
     const handleSave = async ({target:{textContent}}) => {
         // let { publisherName, userId } = LoggedInData();
         const published = {
-            Id: 0,
+            Id: edit ? blogId : 0,
             UserId: userId,
             PublisherName: publisherName,
             Tag: blogTags,
@@ -57,16 +58,25 @@ const Dashboard = ({ isDarkMode, onLogin }) => {
             Description: blogDescription,
             Date: new Date(),
             Category: blogCategory,
-            IsPublished: textContent ==="Save" ? false: true,
+            IsPublished: textContent == "Save" || textContent == "Save Changes" ? false: true,
             IsDeleted: false,
         };
         console.log(published);
+        let result = false;
         handleClose();
-        let result = await AddBlogItems(published);
+        if(edit)
+        {
+            result = await  updateBlogItems(published);
+        }else{
+            result = await AddBlogItems(published);
+        }
+
         if (result) {
             let userBlogItems = await GetItemsByUserId(userId);
             setBlogItems(userBlogItems);
             console.log(userBlogItems, "This is from our UserBlogItems");
+        } else {
+            alert(`Blog Items not ${edit ? " Update" : "Added"}`)
         }
     };
 
@@ -112,7 +122,7 @@ const Dashboard = ({ isDarkMode, onLogin }) => {
             setEdit(true);
         }
 
-            setBlogId(blogId);
+            setBlogId(id);
             setBlogTitle(title);
             setUserId(userId);
             setPublisherName(publisherName)
