@@ -134,7 +134,7 @@ const GetItemsByUserId = async (UserId) => {
 //Function to help us update our blog items
 
 const updateBlogItems = async (blogItems) => {
-    const result = await fetch(`http://localhost:5118/api/blog/UpdateBlogItems`, {
+    const result = await fetch(`http://localhost:5118/api/blog/UpdateBlogItem`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -150,6 +150,14 @@ const updateBlogItems = async (blogItems) => {
     return data;
 };
 
+///function to get our published 
+const getPublishedBlogItems = async () => {
+    let result = await fetch("http://localhost:5118/api/blog/GetPublishedItems")
+    let data = await result.json();
+    return data;
+}
+
+
 export {
     checkToken,
     createAccount,
@@ -161,4 +169,5 @@ export {
     getBlogItems,
     GetItemsByUserId,
     updateBlogItems,
+    getPublishedBlogItems,
 };

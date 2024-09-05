@@ -151,7 +151,18 @@ const Dashboard = ({ isDarkMode, onLogin }) => {
     //     setBlogImage(e.target.value);
     // }
 
-    
+    const handlePublish = async (item) => {
+        item.isPublished = !item.isPublished;
+
+        let result = await updateBlogItems(item);
+        if (result)
+            {
+                let userBlogItems = await GetItemsByUserId(userId);
+                setBlogItems(userBlogItems);
+            } else {
+                alert(`Blog Item not ${edit ? "updated" : "Added"}`);
+            }
+    } 
 
     let navigate = useNavigate();
 
@@ -187,10 +198,21 @@ const Dashboard = ({ isDarkMode, onLogin }) => {
         const reader = new FileReader();
         reader.onloadend = () => {
             console.log(reader.result);
-            // setBlogImage(reader.result);
+            setBlogImage(reader.result);
         };
         reader.readAsDataURL(file);
     };
+
+    const handleDelete = async (item) => {
+        item.isDeleted = !item.isDeleted;
+        let result = await updateBlogItems(item);
+        if(result){
+            let userBlogItems = await GetItemsByUserId(item.userId)
+            setBlogItems(userBlogItems);
+        }else{
+            alert(`Blog Item not ${edit ? "updated" : "Added"}`);
+        }
+    }
 
     return (
         <>
@@ -224,7 +246,7 @@ const Dashboard = ({ isDarkMode, onLogin }) => {
 
                             <Form.Group controlId="Category">
                                 <Form.Label>Category</Form.Label>
-                                <Form.Select > value={blogCategory} onChange={handleCategory}
+                                <Form.Select value={blogCategory} onChange={handleCategory}> 
                                     <option>Select Category</option>
                                     <option value="Food">Food</option>
                                     <option value="Fitness">Fitness</option>
@@ -268,9 +290,9 @@ const Dashboard = ({ isDarkMode, onLogin }) => {
                                 blogItems.map((item, i) => item.isPublished && <ListGroup key={i}>{item.title}
 
                                     <Col className="d-flex justify-content-end mx-2">
-                                        <Button variant="outline-danger mx-2">Delete</Button>
+                                        <Button variant="outline-danger mx-2" onClick={() => handleDelete(item)}>Delete</Button>
                                         <Button variant="outline-info mx-2" onClick={(e) => handleShow(e, item)}>Edit</Button>
-                                        <Button variant="outline-primary mx-2">Unpublish</Button>
+                                        <Button variant="outline-primary mx-2" onClick={() => handlePublish(item)}>Unpublish</Button>
                                     </Col>
 
                                 </ListGroup>)
@@ -284,9 +306,9 @@ const Dashboard = ({ isDarkMode, onLogin }) => {
                                 blogItems.map((item, i) => !item.isPublished && <ListGroup key={i}>{item.title}
 
                                     <Col className="d-flex justify-content-end mx-2">
-                                        <Button variant="outline-danger mx-2">Delete</Button>
+                                        <Button variant="outline-danger mx-2"  onClick={() => handleDelete(item)}>Delete</Button>
                                         <Button variant="outline-info mx-2" onClick={(e) => handleShow(e, item)}>Edit</Button>
-                                        <Button variant="outline-primary mx-2">Publish</Button>
+                                        <Button variant="outline-primary mx-2" onClick={() => handlePublish( item)}>Publish</Button>
                                     </Col>
                                 </ListGroup>)
                             }
