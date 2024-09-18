@@ -36,7 +36,7 @@ const BlogPage = () => {
                                                 <Col md={12}>
                                                     <Row>
                                                         <Col className='d-flex justify-content-center' md={6}>{item.publisherName}</Col>
-                                                        <Col style={{ border: "solid" }} md={6}>{item.data}</Col>
+                                                        <Col style={{ border: "solid" }} md={6}>{item.date}</Col>
                                                     </Row>
                                                 </Col>
                                                 <Col style={{ border: "solid" }} className='d-flex justify-content-center' md={12}><Image src={item.image} width={"400px"} height={"200px"}/></Col>
